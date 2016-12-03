@@ -1,0 +1,4 @@
+#!/bin/bash
+
+make
+./vm_sim "testinput.txt"

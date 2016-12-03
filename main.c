@@ -8,9 +8,15 @@
 
 char *fname = "testinput.txt";
 
-int main()
+int main( int argc, char *argv[] )
 {
-  printf("Hello, World!\n");
+  if( argc == 2 ) {
+      printf(" %s\n", argv[1]);
+      fname = argv[1];
+   }
+
+
+  printf("Hello, World! from %s\n", argv[1]);
 	p_hello();
 	tlb_hello();
 	a_hello();

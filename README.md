@@ -1,4 +1,7 @@
 # MemorySystem
 
 ***$ make*** to make the source code
-***$./main*** t o run the driver
+***$./vm_sim <input file name> *** t o run the driver
+
+
+$ ./run_test make and run the test
