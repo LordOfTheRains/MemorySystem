@@ -1,13 +1,14 @@
 #include "address.h"
+#include "system.h"
 
 void tlb_hello();
 
-#define TLB_SIZE 16 
+// #define TLB_SIZE 16 
 
 /*age_t is used for FIFO, used_t is used for LRU 
 The only real difference is age_t will never be incremented. */
-typedef unsigned int age_t;
-typedef unsigned int used_t;
+// typedef unsigned int age_t;
+// typedef unsigned int used_t;
 
 typedef struct {
     page_t page_num;
