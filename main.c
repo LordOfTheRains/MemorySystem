@@ -19,7 +19,6 @@ int main( int argc, char *argv[] )
   printf("Hello, World! from %s\n", argv[1]);
 	p_hello();
 	tlb_hello();
-<<<<<<< HEAD
 	a_hello();
 
 // address.h tests
@@ -28,8 +27,5 @@ int main( int argc, char *argv[] )
   char *seek_pos = "backing, 250,1";
   int main_mem = example_reader(3,&seek_pos);
   printf("Bye, World!\n");
-=======
-
->>>>>>> 2766e3defbb5ae90a4d41b3670a7afb32941f458
 	return 0;
 }
