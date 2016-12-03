@@ -9,7 +9,7 @@
  * Run: ./address
  * Xiao Qin.
  */
-
+#define DEBUG 1
 
 #define MAX_L_ADDR 20
 
@@ -18,6 +18,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <limits.h>
+
 #include "include/address.h"
 #include "include/page.h"
 #include "include/tlb.h"
@@ -41,16 +42,15 @@ int load_logical_from_file(char *fname){
       exit(EXIT_FAILURE);
   while ((read = getline(&line, &len, fp)) != -1) {
 
-    l_addr_table[i] = (laddress_t)*line;
-    printf("%d", l_addr_table[i]);
+    l_addr_table[i] = atoi(line);
+    //printf("l_addr_table : %d \n", l_addr_table[i]);
+    printf("from logical addr table: %d \n", l_addr_table[i]);
     i++;
       //printf("Retrieved line of length %zu :\n", read);
-      printf("%d", line);
   }
   for (j = 0; j < MAX_L_ADDR; j++ ) {
-      printf("Element[%d] = %s\n", j, l_addr_table[j] );
+      printf("logical address [%d] = %d\n", j, l_addr_table[j] );
    }
-
 
   fclose(fp);
   if (line)
@@ -69,6 +69,7 @@ int translate_to_physical_addr(){
   int i;
   for (i = 0; i < sizeof(l_addr_table); i++ ){
     logical_address = l_addr_table[i];
+    printf("translating %d to physical address", logical_address);
     int err =  translate_logical_addr(logical_address,
                                          &page_num,
                                          &offset,
@@ -97,6 +98,8 @@ int translate_logical_addr(laddress_t l_address,
                             offset_t *o_set,
                             frame_t *f_num,
                             paddress_t *p_addr) {
+
+    printf("translating to physical address");
     laddress_t logical_address;
     page_t     page_num = *p_num;
     offset_t   offset = *o_set;
@@ -118,8 +121,6 @@ int translate_logical_addr(laddress_t l_address,
     printf("offset: %s\n", itob8(offset));
     printf("Unit Testing: Now create physical address ...\n");
 #endif
-
-
     frame_num = page_num;
     physical_address = frame_num << OFFSET_BITS | offset;
 
