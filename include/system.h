@@ -8,7 +8,7 @@
 //max number of page table size;
 #define PAGE_TABLE_SIZE 256
 //max number of entry in tlb
-#define TLB_SIZE 256
+#define TLB_SIZE 16
 
 //number of physical frame
 #define MAX_PHYSICAL_FRAME 256
