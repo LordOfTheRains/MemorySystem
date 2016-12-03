@@ -50,18 +50,10 @@ int tlb_replacement_LRU(page_t p_num, frame_t f_num, tlb_t *tlb){
         if(tlb->tlb_entry[tlb->next_tlb_ptr].valid == false) {
             assert(tlb->next_tlb_ptr >= 0 && tlb->next_tlb_ptr < TLB_SIZE);
             tlb->tlb_entry[tlb->next_tlb_ptr] = muh_entry;
-            // tlb->tlb_entry[tlb->next_tlb_ptr].page_num = p_num;
-            // tlb->tlb_entry[tlb->next_tlb_ptr].frame_num = f_num;
-            // tlb->tlb_entry[tlb->next_tlb_ptr].valid = true;
-            // tlb->tlb_entry[tlb->next_tlb_ptr].used = 0;
 
             tlb->next_tlb_ptr++;
         } else {
              tlb->tlb_entry[oldest_ptr] = muh_entry;
-            // tlb->tlb_entry[oldest_ptr].page_num = p_num;
-            // tlb->tlb_entry[oldest_ptr].frame_num = f_num;
-            // tlb->tlb_entry[oldest_ptr].used = 0;
-            // tlb->tlb_entry[oldest_ptr].valid = true;
         }
     }    
 
@@ -101,18 +93,12 @@ int tlb_replacement_FIFO(page_t p_num, frame_t f_num, tlb_t *tlb){
         if(tlb->tlb_entry[tlb->next_tlb_ptr].valid == false) {
             assert(tlb->next_tlb_ptr >= 0 && tlb->next_tlb_ptr < TLB_SIZE);
             tlb->tlb_entry[tlb->next_tlb_ptr] = muh_entry;
-            // tlb->tlb_entry[tlb->next_tlb_ptr].page_num = p_num;
-            // tlb->tlb_entry[tlb->next_tlb_ptr].frame_num = f_num;
-            // tlb->tlb_entry[tlb->next_tlb_ptr].valid = true;
-            // tlb->tlb_entry[tlb->next_tlb_ptr].age = 0;
+
 
             tlb->next_tlb_ptr++;
         } else {
             tlb->tlb_entry[oldest_ptr] = muh_entry;
-            // tlb->tlb_entry[oldest_ptr].page_num = p_num;
-            // tlb->tlb_entry[oldest_ptr].frame_num = f_num;
-            // tlb->tlb_entry[oldest_ptr].age = 0;
-            // tlb->tlb_entry[oldest_ptr].valid = true;
+
         }
     }    
 }
