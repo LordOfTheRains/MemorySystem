@@ -11,10 +11,10 @@
  */
 #include <stdio.h>
 #include <limits.h>
-#include "address.h"
+#include "include/address.h"
 //#define DEBUG
 
-int main ( int argc, char *argv[] ) {
+int entry ( int argc, char *argv[] ) {
     laddress_t logical_address;
     page_t     page_num;
     offset_t   offset;
@@ -112,4 +112,11 @@ char *itob8(int x)
         j--;
     } 
     return buff;
+}
+
+
+
+void a_hello()
+{
+    printf("Hello from address\n");
 }

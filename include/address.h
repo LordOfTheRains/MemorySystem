@@ -30,4 +30,10 @@ typedef unsigned int paddress_t;
 char *itob(int x);
 char *itob16(int x);
 char *itob8(int x);
+
+
+
+void p_hello();
+
+
 #endif

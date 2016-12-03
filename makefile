@@ -7,10 +7,10 @@ LDIR =../lib
 
 LIBS=-lm
 
-_DEPS = page.h tlb.h
+_DEPS = page.h tlb.h address.h
 DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))
 
-_OBJ = page.o tlb.o main.o 
+_OBJ = address.o page.o tlb.o main.o 
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 
