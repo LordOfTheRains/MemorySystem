@@ -1,0 +1,7 @@
+#!/bin/bash
+
+
+echo "updating files...."
+
+make
+./vm_sim "testinput.txt"
