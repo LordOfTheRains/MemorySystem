@@ -17,10 +17,10 @@
 #include <stdio.h>
 #include <limits.h>
 
+#include "include/system.h"
 #include "include/address.h"
 #include "include/page.h"
 #include "include/tlb.h"
-#define DEBUG
 
 
 laddress_t l_addr_table[MAX_L_ADDR];
