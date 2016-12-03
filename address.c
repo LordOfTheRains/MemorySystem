@@ -55,7 +55,7 @@ int load_logical_from_file(char *fname){
   fclose(fp);
   if (line)
       free(line);
-  exit(EXIT_SUCCESS);
+  //exit(EXIT_SUCCESS);
   return 0;
 }
 
