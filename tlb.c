@@ -118,5 +118,6 @@ int tlb_replacement_FIFO(page_t p_num, frame_t f_num, tlb_t *tlb){
 }
 
 int tlb_init(tlb_t *tlb){
-
+    //Am i missing something or is this it?
+    tlb->next_tlb_ptr = 0;
 }
