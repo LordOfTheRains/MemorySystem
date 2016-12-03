@@ -12,6 +12,7 @@
 /* mask is used to extract the offset from a logical address */
 #define OFFSET_MASK 0xFF
 
+#define MAX_L_ADDR 12
 /* There is no byte data type in C */
 typedef unsigned char byte;
 
