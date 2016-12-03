@@ -20,8 +20,6 @@ typedef int bool;
 #define true 1
 #define false 0
 
-typedef unsigned int age_t;
-
 /* new data type of pages, frames, and offset */
 typedef unsigned int page_t;
 typedef unsigned int frame_t;
