@@ -9,7 +9,7 @@
  * Run: ./address
  * Xiao Qin.
  */
-#define DEBUG 1
+#define DEBUG
 
 #define MAX_L_ADDR 20
 
@@ -61,11 +61,13 @@ int load_logical_from_file(char *fname){
 
 
 int translate_to_physical_addr(){
+  printf("called");
   laddress_t logical_address;
   page_t     page_num;
   offset_t   offset;
   frame_t    frame_num;
   paddress_t physical_address;
+  printf("stuff happening");
   int i;
   for (i = 0; i < sizeof(l_addr_table); i++ ){
     logical_address = l_addr_table[i];
