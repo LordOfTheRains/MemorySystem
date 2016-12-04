@@ -7,6 +7,7 @@
 #include "include/backingstore_reader.h"
 
 char *fname = "testinput.txt";
+char *outname = "vm_sim_output.txt";
 
 int main( int argc, char *argv[] )
 {
