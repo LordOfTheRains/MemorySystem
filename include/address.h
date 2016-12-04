@@ -1,9 +1,14 @@
-#include "system.h"
 /*
  * Project 5: address.h
  * This is a header file of address.c
  * Xiao Qin.
  */
+
+
+ #include "system.h"
+ #include "page.h"
+ #include "tlb.h"
+
 #ifndef ADDRESS_H
 #define ADDRESS_H
 
@@ -15,6 +20,11 @@
 /* mask is used to extract the offset from a logical address */
 #define OFFSET_MASK 0xFF
 
+
+typedef struct {
+  byte memory[PHYSICAL_MEM_SIZE];
+  frame_t *next__frame_ptr;
+}physical_mem_t;
 /* There is no byte data type in C */
 // typedef unsigned char byte;
 
@@ -24,6 +34,7 @@
 // typedef unsigned int offset_t;
 // typedef unsigned int laddress_t;
 // typedef unsigned int paddress_t;
+
 
 /*
  * In C language, there is no binary format in printf
@@ -36,20 +47,14 @@ char *itob16(int x);
 char *itob8(int x);
 
 
-typedef struct {
-  byte memory[PHYSICAL_MEM_SIZE];
-  int next_byte_ptr;
-
-}physical_mem_t;
-
 void a_hello();
 int load_logical_from_file(char *fname);
 
 //this translates all l addr
-int translate_to_physical_addr();
+int translate_to_physical_addr( tlb_t *tlb);
 //given example code
 ///only traslate one at a time
-int translate_logical_addr(
+int translate_logical_addr( tlb_t *tlb,
                             laddress_t l_address,
                             page_t *p_num,
                             offset_t *offset,
@@ -58,5 +63,10 @@ int translate_logical_addr(
 //might not need this
 int get_page_number();
 int get_frame_number();
+
+
+
+int mem_reader( int seek_p, int num_byte, physical_mem_t *p_mem);
+
 
 #endif

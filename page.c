@@ -2,9 +2,6 @@
 #include <stdio.h>
 #include "include/system.h"
 #include "include/page.h"
-#include "include/backingstore_reader.h"
-
-#include "include/tlb.h"
 
 
 int next_frame_in_backing = 0;
@@ -33,13 +30,6 @@ void search_page_table(page_table_t *page_table, page_t page_num, bool *is_page_
 }
 
 
-void load_from_backing_store(){
-  // byte block[FRAME_SIZE];
-  // example_reader(frame,FRAME_SIZE,);
-  // next_frame_in_backing += FRAME_SIZE;
-
-}
-
 
 int page_fault_handler(page_t page_num,	frame_t *frame_num, physical_mem_t *physical_memory,
 			page_table_t *page_table, policy_t tlb_replacement_policy)
@@ -47,8 +37,7 @@ int page_fault_handler(page_t page_num,	frame_t *frame_num, physical_mem_t *phys
 
 	// Load a frame from the backing store
 	// Also gives the frame number of the newly loaded page
-	load_from_backing_store(page_num, BACKING_STORE, physical_memory,
-			frame_num);
+	example_reader(frame_num,FRAME_SIZE, &physical_memory);
 
 	// Add a page entry to the page table
 	page_table->page_entry[page_num].page_num = page_num;
@@ -56,7 +45,7 @@ int page_fault_handler(page_t page_num,	frame_t *frame_num, physical_mem_t *phys
 	page_table->page_entry[page_num].valid = true;
 
 	// Add the newly made page into the TLB
-	//tlb_replacement(page_num, *frame_num,tlb_replacement_policy);
+	tlb_replacement(page_num, *frame_num,tlb_replacement_policy);
 
 	return 0;
 }

@@ -6,6 +6,15 @@
 #include "include/address.h"
 #include "include/backingstore_reader.h"
 
+
+
+typedef struct {
+  byte memory[PHYSICAL_MEM_SIZE];
+  frame_t next__frame_ptr;
+
+}physical_mem_t;
+
+
 char *fname = "testinput.txt";
 char *outname = "vm_sim_output.txt";
 
@@ -47,7 +56,7 @@ int main( int argc, char *argv[] )
 
 // address.h tests
   int read_file = load_logical_from_file(fname);
-  int err = translate_to_physical_addr();
+  int err = translate_to_physical_addr(&sys_tlb);
   printf("Bye, World!\n");
 	return 0;
 }

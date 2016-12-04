@@ -17,10 +17,7 @@
 #include <stdio.h>
 #include <limits.h>
 
-#include "include/system.h"
 #include "include/address.h"
-#include "include/page.h"
-#include "include/tlb.h"
 
 
 laddress_t l_addr_table[MAX_L_ADDR];
@@ -56,7 +53,7 @@ int load_logical_from_file(char *fname){
 }
 
 
-int translate_to_physical_addr(){
+int translate_to_physical_addr(tlb_t *tlb ){
   laddress_t logical_address;
   page_t     page_num;
   offset_t   offset;
@@ -65,7 +62,7 @@ int translate_to_physical_addr(){
   for (int i = 0; i < MAX_L_ADDR; i++ ){
     logical_address = l_addr_table[i];
     printf("translating %d to physical address\n", logical_address);
-    int err =  translate_logical_addr(logical_address,
+    int err =  translate_logical_addr(&tlb, logical_address,
                                          &page_num,
                                          &offset,
                                          &frame_num,
@@ -85,7 +82,8 @@ int translate_to_physical_addr(){
 }
 
 //
-int translate_logical_addr(laddress_t l_address,
+int translate_logical_addr( tlb_t *tlb,
+                            laddress_t l_address,
                             page_t *p_num,
                             offset_t *o_set,
                             frame_t *f_num,
@@ -202,4 +200,63 @@ char *itob8(int x)
 void a_hello()
 {
     printf("Hello from address\n");
+}
+
+int mem_reader( int seek_p, int num_byte, physical_mem_t *p_mem){}
+    const char backingstore[] = BACKING_STORE;
+
+    FILE *file;
+    int i;
+    int seek_position;
+    fpos_t pos;
+    int num_bytes_read;
+    byte one_byte;
+    printf("accessing the backing store.....");
+    /* argc should be 3 for correct execution */
+    // if ( argc != 3 ) {
+    //     /* We print argv[0] assuming it is the program name */
+    //     printf( "usage: %s, <seek position>, <number of bytes to read>\n", argv[0]);
+    //     return 0;
+    // }
+
+    /*
+     * Convert strings into seek_position and num_bytes_read
+     * We assume argv[1] is seek_position and argv[2] is num_bytes_read
+     */
+    seek_position = seek_p;
+    num_bytes_read =num_byte;
+
+#ifdef DEBUG
+    printf("seek_position =%d, num_bytes_read =%d\n", seek_position, num_bytes_read);
+#endif
+
+    file = fopen(backingstore, "r" );
+
+    /* fopen returns 0, the NULL pointer, on failure */
+    if ( file == 0 ) {
+         printf( "Could not open file: %s.\n", backingstore);
+    }
+    else {
+        /* SEEK_SET: reference position is the beginning of file */
+        fseek(file, seek_position, SEEK_SET);
+        fgetpos(file, &pos);
+        //printf("Reading from position: %d.\n",pos);
+
+        /* Read and print data from backingstore */
+
+        for (i = 0; i < num_bytes_read; i++) {
+           fread(&one_byte, 1, 1, file);
+           /* printf prints one byte as hex */
+           printf("0x%x, %d", one_byte, one_byte);
+           int frame =   p_mem->next__frame_ptr;
+            p_mem->memory[frame+i] = one_byte;
+           /*
+            * Note: If one_byte's data type is int,
+            * then we have to use a bit mask: one_byte&0xFF
+            */
+        }
+        printf("\n");
+
+        fclose( file );
+    }
 }
