@@ -24,6 +24,7 @@ int main( int argc, char *argv[] )
 
 	//Get dat replacement policy
 	policy_t usr_policy = -1;
+	int tlb_hits = 0;
 	while (usr_policy != POLICY_FIFO && usr_policy != POLICY_LRU) {
 		printf("Choose TLB replacement policy [%d: FIFO, %d: LRU] ", POLICY_FIFO, POLICY_LRU);
 		scanf("%d", &usr_policy);

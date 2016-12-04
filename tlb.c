@@ -9,7 +9,7 @@ void tlb_hello()
 }
 
 
-int tlb_replacement(tlb_entry_t new_entry, tlb_t *tlb, policy_t policy){
+int tlb_replacement(tlb_entry_t new_entry, tlb_t *tlb, policy_t policy, bool *rethit){
     if (tlb->next_tlb_ptr < TLB_SIZE) {
         tlb->tlb_entry[tlb->next_tlb_ptr] = new_entry;
     } else {
@@ -22,7 +22,7 @@ int tlb_replacement(tlb_entry_t new_entry, tlb_t *tlb, policy_t policy){
     }
 }
 
-int tlb_replacement_LRU(page_t p_num, frame_t f_num, tlb_t *tlb){
+int tlb_replacement_LRU(page_t p_num, frame_t f_num, tlb_t *tlb, bool *rethit){
     int oldest_used = 0;
     int oldest_ptr = 0;
     bool found = false;
@@ -64,7 +64,7 @@ int tlb_replacement_LRU(page_t p_num, frame_t f_num, tlb_t *tlb){
 
 }
 
-int tlb_replacement_FIFO(page_t p_num, frame_t f_num, tlb_t *tlb){
+int tlb_replacement_FIFO(page_t p_num, frame_t f_num, tlb_t *tlb, bool *rethit){
     int oldest_age = 0;
     int oldest_ptr = 0;
     bool found = false;
