@@ -44,8 +44,6 @@ int main( int argc, char *argv[] )
 	tlb_t sys_tlb;
 	tlb_init(&sys_tlb);
 
-	laddress_t logic_address_list
-	
 
 // address.h tests
   int read_file = load_logical_from_file(fname);
