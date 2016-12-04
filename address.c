@@ -25,8 +25,6 @@
 
 laddress_t l_addr_table[MAX_L_ADDR];
 
-
-
 int load_logical_from_file(char *fname){
   FILE * fp;
   char * line = NULL;

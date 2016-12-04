@@ -21,6 +21,7 @@ int main( int argc, char *argv[] )
 	p_hello();
 	tlb_hello();
 	a_hello();
+  //initialize physical mmemory;
 
 	//Get dat replacement policy
 	policy_t usr_policy = -1;
@@ -36,20 +37,17 @@ int main( int argc, char *argv[] )
 		case POLICY_LRU:
 			printf("Using LRU policy.\n");
 			break;
-		case POLICY_FIFO:	
+		case POLICY_FIFO:
 			printf("Using FIFO policy.\n");
 			break;
 	}
-	
+
 	tlb_t sys_tlb;
 	tlb_init(&sys_tlb);
-
 
 // address.h tests
   int read_file = load_logical_from_file(fname);
   int err = translate_to_physical_addr();
-  char *seek_pos = "backing, 250,1";
-  int main_mem = example_reader(3,&seek_pos);
   printf("Bye, World!\n");
 	return 0;
 }

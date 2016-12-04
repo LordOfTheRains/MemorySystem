@@ -13,7 +13,7 @@
 
 //int main ( int argc, char *argv[] ) {
 
-int example_reader ( int argc, char *argv[] ) {
+int example_reader (int seek_p, int num_byte, byte *data[] ) {
     const char backingstore[] = BACKING_STORE;
 
     FILE *file;
@@ -24,18 +24,18 @@ int example_reader ( int argc, char *argv[] ) {
     byte one_byte;
     printf("accessing the backing store.....");
     /* argc should be 3 for correct execution */
-    if ( argc != 3 ) {
-        /* We print argv[0] assuming it is the program name */
-        printf( "usage: %s, <seek position>, <number of bytes to read>\n", argv[0]);
-        return 0;
-    }
+    // if ( argc != 3 ) {
+    //     /* We print argv[0] assuming it is the program name */
+    //     printf( "usage: %s, <seek position>, <number of bytes to read>\n", argv[0]);
+    //     return 0;
+    // }
 
     /*
      * Convert strings into seek_position and num_bytes_read
      * We assume argv[1] is seek_position and argv[2] is num_bytes_read
      */
-    seek_position = atoi(argv[1]);
-    num_bytes_read = atoi(argv[2]);
+    seek_position = seek_p;
+    num_bytes_read =num_byte;
 
 #ifdef DEBUG
     printf("seek_position =%d, num_bytes_read =%d\n", seek_position, num_bytes_read);
@@ -54,10 +54,12 @@ int example_reader ( int argc, char *argv[] ) {
         printf("Reading from position: %d.\n", pos);
 
         /* Read and print data from backingstore */
+
         for (i = 0; i < num_bytes_read; i++) {
            fread(&one_byte, 1, 1, file);
            /* printf prints one byte as hex */
            printf("0x%x, %d", one_byte, one_byte);
+            *data[i] = one_byte;
            /*
             * Note: If one_byte's data type is int,
             * then we have to use a bit mask: one_byte&0xFF
