@@ -36,11 +36,6 @@ typedef unsigned char byte;
 /* new data type of pages, frames, and offset */
 
 
-typedef struct {
-  byte memory[PHYSICAL_MEM_SIZE];
-  int next_byte_ptr;
-
-}physical_mem_t;
 
 typedef unsigned int page_t;
 typedef unsigned int frame_t;

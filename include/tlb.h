@@ -24,14 +24,9 @@ typedef struct {
     unsigned int next_tlb_ptr;
 } tlb_t;
 
-<<<<<<< HEAD
 
-int update_tlb(page_t p_num, frame_t f_num, tlb_t *tlb, int policy);
 
-int tlb_replacement(tlb_entry_t new_entry, tlb_t *tlb);
-=======
 int tlb_replacement(tlb_entry_t new_entry, tlb_t *tlb, policy_t policy);
->>>>>>> 4e607a65539113631abc20778d6e56b2ace1b12d
 
 int tlb_replacement_LRU(page_t p_num, frame_t f_num, tlb_t *tlb);
 

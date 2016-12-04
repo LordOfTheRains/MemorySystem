@@ -42,12 +42,12 @@ void load_from_backing_store(){
 
 
 int page_fault_handler(page_t page_num,	frame_t *frame_num, physical_mem_t *physical_memory,
-			page_table_t *page_table, int tlb_replacement_policy)
+			page_table_t *page_table, policy_t tlb_replacement_policy)
 {
 
 	// Load a frame from the backing store
 	// Also gives the frame number of the newly loaded page
-	load_from_backing_store(page_num, backingstore, physical_memory,
+	load_from_backing_store(page_num, BACKING_STORE, physical_memory,
 			frame_num);
 
 	// Add a page entry to the page table
@@ -56,7 +56,7 @@ int page_fault_handler(page_t page_num,	frame_t *frame_num, physical_mem_t *phys
 	page_table->page_entry[page_num].valid = true;
 
 	// Add the newly made page into the TLB
-	TLB_replacement(page_num, *frame_num, tlb, replacement_policy);
+	//tlb_replacement(page_num, *frame_num,tlb_replacement_policy);
 
 	return 0;
 }
