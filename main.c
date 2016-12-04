@@ -20,12 +20,12 @@ int main( int argc, char *argv[] )
 	p_hello();
 	tlb_hello();
 	a_hello();
-
+  //initialize physical mmemory;
 // address.h tests
   int read_file = load_logical_from_file(fname);
   int err = translate_to_physical_addr();
-  char *seek_pos = "backing, 250,1";
-  int main_mem = example_reader(3,&seek_pos);
+  printf("about to read from main mem\n");
+  int main_mem = example_reader(1,20);
   printf("Bye, World!\n");
 	return 0;
 }

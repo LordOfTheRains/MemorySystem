@@ -10,8 +10,8 @@
 //max number of entry in tlb
 #define TLB_SIZE 16
 
-//number of physical frame
-#define MAX_PHYSICAL_FRAME 256
+// frame size
+#define FRAME_SIZE 256
 
 //physical memeory size
 #define PHYSICAL_MEM_SIZE 65536
@@ -22,11 +22,18 @@
 
 
 
-
 /* There is no byte data type in C */
 typedef unsigned char byte;
 
 /* new data type of pages, frames, and offset */
+
+
+typedef struct {
+  byte memory[PHYSICAL_MEM_SIZE];
+  int next_byte_ptr;
+
+}physical_mem_t;
+
 typedef unsigned int page_t;
 typedef unsigned int frame_t;
 typedef unsigned int offset_t;
