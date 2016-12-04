@@ -15,8 +15,10 @@ int tlb_replacement(tlb_entry_t new_entry, tlb_t *tlb, policy_t policy){
     } else {
         switch(policy) {
             case POLICY_LRU:
+                tlb_replacement_LRU(new_entry.page_num, new_entry.frame_num, &tlb);
                 break;
             case POLICY_FIFO:
+                tlb_replacement_FIFO(new_entry.page_num, new_entry.frame_num, &tlb);
                 break;
         }
     }
