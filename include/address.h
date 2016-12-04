@@ -1,3 +1,4 @@
+#include "system.h"
 /*
  * Project 5: address.h
  * This is a header file of address.c
@@ -11,27 +12,22 @@
 /*
  * In C language, there is no binary format in printf
  * You must implement the following functions to print binary format
-/* mask is used to extract the offset from a logical address */ 
-#define OFFSET_MASK 0xFF 
+/* mask is used to extract the offset from a logical address */
+#define OFFSET_MASK 0xFF
 
 /* There is no byte data type in C */
-typedef unsigned char byte;
-
-/*gotta have muh bools */
-typedef int bool;
-#define true 1
-#define false 0
+// typedef unsigned char byte;
 
 /* new data type of pages, frames, and offset */
-typedef unsigned int page_t;
-typedef unsigned int frame_t;
-typedef unsigned int offset_t;
-typedef unsigned int laddress_t;
-typedef unsigned int paddress_t;
+// typedef unsigned int page_t;
+// typedef unsigned int frame_t;
+// typedef unsigned int offset_t;
+// typedef unsigned int laddress_t;
+// typedef unsigned int paddress_t;
 
-/* 
- * In C language, there is no binary format in printf 
- * You must implement the following functions to print binary format 
+/*
+ * In C language, there is no binary format in printf
+ * You must implement the following functions to print binary format
 >>>>>>> 2766e3defbb5ae90a4d41b3670a7afb32941f458
  * itob16() and itob8() are modified from itob() by Xiao Qin.
  */
@@ -40,6 +36,11 @@ char *itob16(int x);
 char *itob8(int x);
 
 
+typedef struct {
+  byte memory[PHYSICAL_MEM_SIZE];
+  int next_byte_ptr;
+
+}physical_mem_t;
 
 void a_hello();
 int load_logical_from_file(char *fname);
