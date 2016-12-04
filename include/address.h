@@ -1,3 +1,4 @@
+#include "system.h"
 /*
  * Project 5: address.h
  * This is a header file of address.c
@@ -15,14 +16,14 @@
 #define OFFSET_MASK 0xFF 
 
 /* There is no byte data type in C */
-typedef unsigned char byte;
+// typedef unsigned char byte;
 
 /* new data type of pages, frames, and offset */
-typedef unsigned int page_t;
-typedef unsigned int frame_t;
-typedef unsigned int offset_t;
-typedef unsigned int laddress_t;
-typedef unsigned int paddress_t;
+// typedef unsigned int page_t;
+// typedef unsigned int frame_t;
+// typedef unsigned int offset_t;
+// typedef unsigned int laddress_t;
+// typedef unsigned int paddress_t;
 
 /* 
  * In C language, there is no binary format in printf 

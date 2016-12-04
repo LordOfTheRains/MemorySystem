@@ -9,11 +9,16 @@ void tlb_hello()
 }
 
 
-int tlb_replacement(tlb_entry_t new_entry, tlb_t *tlb){
+int tlb_replacement(tlb_entry_t new_entry, tlb_t *tlb, policy_t policy){
     if (tlb->next_tlb_ptr < TLB_SIZE) {
         tlb->tlb_entry[tlb->next_tlb_ptr] = new_entry;
     } else {
-        
+        switch(policy) {
+            case POLICY_LRU:
+                break;
+            case POLICY_FIFO:
+                break;
+        }
     }
 }
 

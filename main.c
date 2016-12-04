@@ -21,6 +21,24 @@ int main( int argc, char *argv[] )
 	tlb_hello();
 	a_hello();
 
+	//Get dat replacement policy
+	policy_t usr_policy = -1;
+	while (usr_policy != POLICY_FIFO && usr_policy != POLICY_LRU) {
+		printf("Choose TLB replacement policy [%d: FIFO, %d: LRU] ", POLICY_FIFO, POLICY_LRU);
+		scanf("%d", &usr_policy);
+		if (usr_policy != POLICY_FIFO && usr_policy != POLICY_LRU) {
+			printf("Not valid policy.\n");
+		}
+	}
+	switch (usr_policy){
+		case POLICY_LRU:
+			printf("Using LRU policy.\n");
+			break;
+		case POLICY_FIFO:	
+			printf("Using FIFO policy.\n");
+			break;
+	}
+	
 // address.h tests
   int read_file = load_logical_from_file(fname);
   int err = translate_to_physical_addr();

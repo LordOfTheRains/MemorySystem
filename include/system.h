@@ -20,6 +20,11 @@
 //should be 256 when done
 #define MAX_L_ADDR 12 //max number of logical address loaded from file
 
+//For picking policy
+typedef int policy_t;
+#define POLICY_FIFO 1
+#define POLICY_LRU 2
+
 /*gotta have muh bools */
 typedef int bool;
 #define true 1

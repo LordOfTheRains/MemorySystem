@@ -23,7 +23,7 @@ typedef struct {
     unsigned int next_tlb_ptr;
 } tlb_t;
 
-int tlb_replacement(tlb_entry_t new_entry, tlb_t *tlb);
+int tlb_replacement(tlb_entry_t new_entry, tlb_t *tlb, policy_t policy);
 
 int tlb_replacement_LRU(page_t p_num, frame_t f_num, tlb_t *tlb);
 
