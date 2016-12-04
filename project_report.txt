@@ -1,0 +1,81 @@
+11.1)
+
+1) We extracted 16bit from the 32bit input from the input since our system only
+ takes 16bit logical address. Then we take the first 8bit as page number 
+ and last 8bit as offset. We search tlb table for the page number, if its a 
+ hit then we load the frame number then the physical is framenumber in first 
+ 8bit and offset in last 8bit. If the tlb is a miss, we go to page table to 
+ locate the frame number and do the same operation. If page is also a miss.
+
+
+
+2)typedef struct {
+    page_t page_num;
+    frame_t frame_num;
+    bool valid;
+} page_entry_t;
+
+typedef struct {
+    page_entry_t page_entry[PAGE_TABLE_SIZE];
+} page_table_t;
+
+
+typedef struct {
+    page_t page_num;
+    frame_t frame_num;
+    bool valid;
+    age_t age;
+    used_t used;
+} tlb_entry_t;
+
+typedef struct {
+    tlb_entry_t tlb_entry[TLB_SIZE];
+    unsigned int next_tlb_ptr;
+} tlb_t;
+
+
+typedef struct {
+  byte memory[PHYSICAL_MEM_SIZE];
+  frame_t next_frame_ptr;
+
+}physical_mem_t;
+
+
+3) Not yet but close.
+
+4)  page_num = logical_address >> OFFSET_BITS;
+    offset = logical_address & OFFSET_MASK;
+
+
+5) We implemented both FIFO and LRU. The user can select which 
+policy to use at the begining of the program. Detailed implemntation is inside 
+tlb.c
+
+11.2)
+1) Its pretty general because we can select replacement policy therefore 
+soluiton becomes extensible. All hard coded values are defined inside sytem.h 
+which can be modified in single spot.
+
+2) It is very simple we have a system.h constant file where you define all 
+system related constant such as page table size.
+
+3) yes
+
+4) No. It is offset as framenum+offset, which are both equal in size since 
+frame number is the same size as page number.
+
+11.3
+1) It is as elegant as we can make it. We use different modules for related 
+funcions for readability and nothing is directly hardcoded. Constants are in 
+dedicated file and policies are separated from the mechanism.
+
+2) It is not very innovative since we are only implementing simple replacement 
+policy and nothing thinking about loading from backing storage either on a 
+need basis or in a pre-fetching fashion.
+
+3) We didnt use anything except what was provided by Dr.Qin on canvas, which 
+we didnt modify the comments that he put in with his name. All other files 
+without author info are made by us.  
+
+
+
