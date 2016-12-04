@@ -78,4 +78,11 @@ we didnt modify the comments that he put in with his name. All other files
 without author info are made by us.  
 
 
+INCOMPLETE:
+We were unable to do all that the assignment required. This is due to several
+factors: we have a shortage of people, we didn't understand the material as 
+well as we thought, and other work outside of this class kept us busy and 
+prevented us from starting sooner. 
+
+
 
