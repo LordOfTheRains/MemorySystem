@@ -27,7 +27,7 @@ laddress_t l_addr_table[MAX_L_ADDR];
 
 
 
-int load_logical_from_file(char *fname){
+int load_logical_from_file(char *fname, laddress_t *logic_addr_list[]) {
   FILE * fp;
   char * line = NULL;
   int i = 0;
@@ -73,7 +73,7 @@ int translate_to_physical_addr(){
                                          &frame_num,
                                          &physical_address);
     if(err == 0){
-      printf("logical address: %d, page number: %d, offset: %d frame number: %d physical address: %d\n",
+      printf("logical address: %d, page number: %d, offset: %d frame number: %d \nphysical address: %d\n",
               logical_address,
               page_num,
               offset,

@@ -1,3 +1,4 @@
+#include "system.h"
 /*
  * Project 5: address.h
  * This is a header file of address.c
@@ -15,19 +16,14 @@
 #define OFFSET_MASK 0xFF 
 
 /* There is no byte data type in C */
-typedef unsigned char byte;
-
-/*gotta have muh bools */
-typedef int bool;
-#define true 1
-#define false 0
+// typedef unsigned char byte;
 
 /* new data type of pages, frames, and offset */
-typedef unsigned int page_t;
-typedef unsigned int frame_t;
-typedef unsigned int offset_t;
-typedef unsigned int laddress_t;
-typedef unsigned int paddress_t;
+// typedef unsigned int page_t;
+// typedef unsigned int frame_t;
+// typedef unsigned int offset_t;
+// typedef unsigned int laddress_t;
+// typedef unsigned int paddress_t;
 
 /* 
  * In C language, there is no binary format in printf 
@@ -42,7 +38,7 @@ char *itob8(int x);
 
 
 void a_hello();
-int load_logical_from_file(char *fname);
+int load_logical_from_file(char *fname, laddress_t *logic_addr_list[]);
 
 //this translates all l addr
 int translate_to_physical_addr();

@@ -20,7 +20,15 @@
 //should be 256 when done
 #define MAX_L_ADDR 12 //max number of logical address loaded from file
 
+//For picking policy
+typedef int policy_t;
+#define POLICY_FIFO 1
+#define POLICY_LRU 2
 
+/*gotta have muh bools */
+typedef int bool;
+#define true 1
+#define false 0
 
 /* There is no byte data type in C */
 typedef unsigned char byte;
@@ -39,3 +47,6 @@ typedef unsigned int frame_t;
 typedef unsigned int offset_t;
 typedef unsigned int laddress_t;
 typedef unsigned int paddress_t;
+
+typedef unsigned int age_t;
+typedef unsigned int used_t;
