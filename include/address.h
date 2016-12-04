@@ -38,7 +38,7 @@ char *itob8(int x);
 
 
 void a_hello();
-int load_logical_from_file(char *fname, laddress_t *logic_addr_list[]);
+int load_logical_from_file(char *fname);
 
 //this translates all l addr
 int translate_to_physical_addr();
