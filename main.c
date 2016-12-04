@@ -1,19 +1,9 @@
 #include <stdio.h>
 
-#include "include/system.h"
-#include "include/page.h"
-#include "include/tlb.h"
+
+
+
 #include "include/address.h"
-#include "include/backingstore_reader.h"
-
-
-
-typedef struct {
-  byte memory[PHYSICAL_MEM_SIZE];
-  frame_t next__frame_ptr;
-
-}physical_mem_t;
-
 
 char *fname = "testinput.txt";
 char *outname = "vm_sim_output.txt";
@@ -54,9 +44,15 @@ int main( int argc, char *argv[] )
 	tlb_t sys_tlb;
 	tlb_init(&sys_tlb);
 
+  page_table_t sys_pg_table;
+  page_table_init(&sys_pg_table);
+
+
+  physical_mem_t physical_memory;
+  physical_memorys->next_frame_ptr = 0;
 // address.h tests
   int read_file = load_logical_from_file(fname);
-  int err = translate_to_physical_addr(&sys_tlb);
+  int err = translate_to_physical_addr(&sys_tlb, &sys_pg_table, &physical_memory,usr_policy);
   printf("Bye, World!\n");
 	return 0;
 }
