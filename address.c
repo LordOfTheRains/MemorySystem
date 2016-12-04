@@ -54,7 +54,7 @@ int load_logical_from_file(char *fname){
 }
 
 
-int translate_to_physical_addr(tlb_t *tlb, page_table_t *pg_table, physical_mem_t *physical_memory,policy_t policy ){
+int translate_to_physical_addr(FILE *file, tlb_t *tlb, page_table_t *pg_table, physical_mem_t *physical_memory,policy_t policy ){
   laddress_t logical_address;
   page_t     page_num;
   offset_t   offset;
@@ -86,10 +86,28 @@ int translate_to_physical_addr(tlb_t *tlb, page_table_t *pg_table, physical_mem_
         }
       }
 
-    }
+    for (int i = 0; i < MAX_L_ADDR; i++ ){
+        logical_address = l_addr_table[i];
+        printf("translating %d to physical address\n", logical_address);
+        int err =  translate_logical_addr(logical_address,
+                                            &page_num,
+                                            &offset,
+                                            &frame_num,
+                                            &physical_address);
+        if(err == 0){
+        printf("logical address: %d, page number: %d, offset: %d frame number: %d \nphysical address: %d\n",
+                logical_address,
+                page_num,
+                offset,
+                frame_num,
+                physical_address);
+        printf("------------------------------------------\n");
 
-  }
-  return 0;
+        fprintf(file, "Virtual Address: %d; Physical address: %d; Value: %d", logical_address, physical_address, 0);
+
+        }
+    return 0;
+    }
 }
 
 //
@@ -208,7 +226,6 @@ char *itob8(int x)
 
 
 
-void a_hello()
-{
+void a_hello() {
     printf("Hello from address\n");
 }

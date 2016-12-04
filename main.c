@@ -43,6 +43,8 @@ int main( int argc, char *argv[] )
 
 	tlb_t sys_tlb;
 	tlb_init(&sys_tlb);
+	FILE *outFile;
+	outFile = fopen(outname, "w+");
 
   page_table_t sys_pg_table;
   page_table_init(&sys_pg_table);
@@ -52,7 +54,7 @@ int main( int argc, char *argv[] )
   physical_memorys->next_frame_ptr = 0;
 // address.h tests
   int read_file = load_logical_from_file(fname);
-  int err = translate_to_physical_addr(&sys_tlb, &sys_pg_table, &physical_memory,usr_policy);
+  int err = translate_to_physical_addr(&outFile, &sys_tlb, &sys_pg_table, &physical_memory,usr_policy);
   printf("Bye, World!\n");
 	return 0;
 }

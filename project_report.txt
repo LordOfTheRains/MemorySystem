@@ -73,6 +73,22 @@ dedicated file and policies are separated from the mechanism.
 policy and nothing thinking about loading from backing storage either on a
 need basis or in a pre-fetching fashion.
 
+<<<<<<< HEAD
 3) We didnt use anything except what was provided by Dr.Qin on canvas, which
 we didnt modify the comments that he put in with his name. All other files
 without author info are made by us.
+=======
+3) We didnt use anything except what was provided by Dr.Qin on canvas, which 
+we didnt modify the comments that he put in with his name. All other files 
+without author info are made by us.  
+
+
+INCOMPLETE:
+We were unable to do all that the assignment required. This is due to several
+factors: we have a shortage of people, we didn't understand the material as 
+well as we thought, and other work outside of this class kept us busy and 
+prevented us from starting sooner. 
+
+
+
+>>>>>>> d4d67958542a3bb10d4430d5b6ee28622db7d164
