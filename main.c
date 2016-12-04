@@ -44,10 +44,12 @@ int main( int argc, char *argv[] )
 
 	tlb_t sys_tlb;
 	tlb_init(&sys_tlb);
+	FILE *outFile;
+	outFile = fopen(outname, "w+");
 
 // address.h tests
   int read_file = load_logical_from_file(fname);
-  int err = translate_to_physical_addr();
+  int err = translate_to_physical_addr(&outFile);
   printf("Bye, World!\n");
 	return 0;
 }

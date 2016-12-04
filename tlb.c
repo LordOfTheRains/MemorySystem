@@ -117,11 +117,11 @@ int tlb_search(page_t p_num, frame_t f_num, tlb_t *tlb, bool *isHit){
         assert(tlb->tlb_entry[i].valid);
         if (tlb->tlb_entry[i].page_num == p_num) {
             assert(tlb->tlb_entry[i].frame_num == f_num);
-            isHit = true;
+            *isHit = true;
             return 0;
         }
     }
-    isHit = false;
+    *isHit = false;
     return 0;
 }
 
