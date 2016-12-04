@@ -41,6 +41,9 @@ int main( int argc, char *argv[] )
 			break;
 	}
 	
+	
+
+
 // address.h tests
   int read_file = load_logical_from_file(fname);
   int err = translate_to_physical_addr();

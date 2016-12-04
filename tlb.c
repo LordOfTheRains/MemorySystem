@@ -9,7 +9,7 @@ void tlb_hello()
 }
 
 
-int tlb_replacement(tlb_entry_t new_entry, tlb_t *tlb, policy_t policy, bool *rethit){
+int tlb_replacement(tlb_entry_t new_entry, tlb_t *tlb, policy_t policy){
     if (tlb->next_tlb_ptr < TLB_SIZE) {
         tlb->tlb_entry[tlb->next_tlb_ptr] = new_entry;
     } else {
@@ -22,7 +22,7 @@ int tlb_replacement(tlb_entry_t new_entry, tlb_t *tlb, policy_t policy, bool *re
     }
 }
 
-int tlb_replacement_LRU(page_t p_num, frame_t f_num, tlb_t *tlb, bool *rethit){
+int tlb_replacement_LRU(page_t p_num, frame_t f_num, tlb_t *tlb){
     int oldest_used = 0;
     int oldest_ptr = 0;
     bool found = false;
@@ -64,7 +64,7 @@ int tlb_replacement_LRU(page_t p_num, frame_t f_num, tlb_t *tlb, bool *rethit){
 
 }
 
-int tlb_replacement_FIFO(page_t p_num, frame_t f_num, tlb_t *tlb, bool *rethit){
+int tlb_replacement_FIFO(page_t p_num, frame_t f_num, tlb_t *tlb){
     int oldest_age = 0;
     int oldest_ptr = 0;
     bool found = false;
@@ -106,6 +106,21 @@ int tlb_replacement_FIFO(page_t p_num, frame_t f_num, tlb_t *tlb, bool *rethit){
 
         }
     }    
+}
+
+int tlb_search(page_t p_num, frame_t f_num, tlb_t *tlb, bool *isHit){
+    
+    int i;
+    for(i = 0; i < tlb->next_tlb_ptr; i++) {
+        assert(tlb->tlb_entry[i].valid);
+        if (tlb->tlb_entry[i].page_num == p_num) {
+            assert(tlb->tlb_entry[i].frame_num == f_num);
+            isHit = true;
+            return 0;
+        }
+    }
+    isHit = false;
+    return 0;
 }
 
 int tlb_init(tlb_t *tlb){

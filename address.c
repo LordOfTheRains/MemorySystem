@@ -73,7 +73,7 @@ int translate_to_physical_addr(){
                                          &frame_num,
                                          &physical_address);
     if(err == 0){
-      printf("logical address: %d, page number: %d, offset: %d frame number: %d physical address: %d\n",
+      printf("logical address: %d, page number: %d, offset: %d frame number: %d \nphysical address: %d\n",
               logical_address,
               page_num,
               offset,
