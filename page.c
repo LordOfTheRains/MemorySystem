@@ -23,11 +23,11 @@ int page_table_init(page_table_t *page_table)
 	return 0;
 }
 
-void search_page_table(page_table_t *page_table, page_t page_num, int *is_page_fault, frame_t *frame_num)
+void search_page_table(page_table_t *page_table, page_t page_num, bool *is_page_fault, frame_t *frame_num)
 {
   //check poage number out ofbound and page not loaded
   if(page_num >= PAGE_TABLE_SIZE || !page_table->page_entry[page_num].valid){
-      *is_page_fault = 1;
+      *is_page_fault = true;
   }
   *frame_num = page_table->page_entry[page_num].frame_num;
 }
