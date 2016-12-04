@@ -1,4 +1,6 @@
 
+#ifndef SYSTEM_H
+#define SYSTEM_H
 
 #define DEBUG
 
@@ -45,3 +47,11 @@ typedef unsigned int paddress_t;
 
 typedef unsigned int age_t;
 typedef unsigned int used_t;
+typedef struct {
+  byte memory[PHYSICAL_MEM_SIZE];
+  frame_t next_frame_ptr;
+
+}physical_mem_t;
+
+
+#endif

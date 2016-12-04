@@ -1,10 +1,6 @@
 
 #include <stdio.h>
-#include "include/system.h"
 #include "include/page.h"
-#include "include/backingstore_reader.h"
-
-#include "include/tlb.h"
 
 
 int next_frame_in_backing = 0;
@@ -33,13 +29,6 @@ void search_page_table(page_table_t *page_table, page_t page_num, bool *is_page_
 }
 
 
-void load_from_backing_store(){
-  // byte block[FRAME_SIZE];
-  // example_reader(frame,FRAME_SIZE,);
-  // next_frame_in_backing += FRAME_SIZE;
-
-}
-
 
 int page_fault_handler(page_t page_num,	frame_t *frame_num, physical_mem_t *physical_memory,
 			page_table_t *page_table, policy_t tlb_replacement_policy)
@@ -47,8 +36,7 @@ int page_fault_handler(page_t page_num,	frame_t *frame_num, physical_mem_t *phys
 
 	// Load a frame from the backing store
 	// Also gives the frame number of the newly loaded page
-	load_from_backing_store(page_num, BACKING_STORE, physical_memory,
-			frame_num);
+	mem_reader(frame_num,FRAME_SIZE, &physical_memory);
 
 	// Add a page entry to the page table
 	page_table->page_entry[page_num].page_num = page_num;
@@ -56,7 +44,7 @@ int page_fault_handler(page_t page_num,	frame_t *frame_num, physical_mem_t *phys
 	page_table->page_entry[page_num].valid = true;
 
 	// Add the newly made page into the TLB
-	//tlb_replacement(page_num, *frame_num,tlb_replacement_policy);
+	tlb_replacement(page_num, *frame_num,tlb_replacement_policy);
 
 	return 0;
 }
@@ -71,4 +59,65 @@ int page_fault_handler(page_t page_num,	frame_t *frame_num, physical_mem_t *phys
 void p_hello()
 {
     printf("Hello from pages\n");
+}
+
+
+
+int mem_reader( int seek_p, int num_byte, physical_mem_t *p_mem){
+    const char backingstore[] = BACKING_STORE;
+
+    FILE *file;
+    int i;
+    int seek_position;
+    fpos_t pos;
+    int num_bytes_read;
+    byte one_byte;
+    printf("accessing the backing store.....");
+    /* argc should be 3 for correct execution */
+    // if ( argc != 3 ) {
+    //     /* We print argv[0] assuming it is the program name */
+    //     printf( "usage: %s, <seek position>, <number of bytes to read>\n", argv[0]);
+    //     return 0;
+    // }
+
+    /*
+     * Convert strings into seek_position and num_bytes_read
+     * We assume argv[1] is seek_position and argv[2] is num_bytes_read
+     */
+    seek_position = seek_p;
+    num_bytes_read =num_byte;
+
+#ifdef DEBUG
+    printf("seek_position =%d, num_bytes_read =%d\n", seek_position, num_bytes_read);
+#endif
+
+    file = fopen(backingstore, "r" );
+
+    /* fopen returns 0, the NULL pointer, on failure */
+    if ( file == 0 ) {
+         printf( "Could not open file: %s.\n", backingstore);
+    }
+    else {
+        /* SEEK_SET: reference position is the beginning of file */
+        fseek(file, seek_position, SEEK_SET);
+        fgetpos(file, &pos);
+        //printf("Reading from position: %d.\n",pos);
+
+        /* Read and print data from backingstore */
+
+        for (i = 0; i < num_bytes_read; i++) {
+           fread(&one_byte, 1, 1, file);
+           /* printf prints one byte as hex */
+           printf("0x%x, %d", one_byte, one_byte);
+           frame_t frame =   p_mem->next_frame_ptr;
+            p_mem->memory[frame+i] = one_byte;
+           /*
+            * Note: If one_byte's data type is int,
+            * then we have to use a bit mask: one_byte&0xFF
+            */
+        }
+        printf("\n");
+
+        fclose( file );
+    }
 }
